@@ -247,7 +247,6 @@ select {
 
 .question {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 40px;
     min-height: 350px;
 }
