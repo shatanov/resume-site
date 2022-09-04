@@ -253,11 +253,13 @@ select {
 
 .question__name--gray {
     background-color: #ececec !important;
+    border: none !important;
 }
 
 .question__name {
     width: 200px;
     background-color: #fff;
+    border: 2px solid #ececec;
     display: flex;
     flex-direction: column;
     justify-content: center;
