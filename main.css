@@ -249,6 +249,7 @@ select {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+    min-height: 350px;
 }
 
 .question__name--gray {
