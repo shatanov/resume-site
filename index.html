@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--    100 лишнее, а 600 пропустил судя по css-->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <title>Резюме</title>
@@ -14,6 +15,7 @@
 
 <body>
     <header>
+<!--        лишняя вложенность, можно header.container.header__inner-->
         <div class="container">
             <div class="header__inner">
                 <div class="user">
@@ -30,8 +32,11 @@
                         </div>
                         <div class="user__account">
                             <div class="account__github">
+<!--                                тот кейс где можно заюзать aria атрибуты, раз контента нет-->
+<!--                                https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby-->
                                 <a href="https://github.com/shatanov" class="github__link" target="_blank"
                                     title="github">
+<!--                                    alt можно заполнить-->
                                     <img src="img/github.svg" alt="">
                                 </a>
                             </div>
@@ -39,10 +44,15 @@
                     </div>
                 </div>
                 <div class="info">
+<!--                    идея понятная, но ты как раз не делаешь разрыв контента, у тебя до этого была шапка, а теперь начинается контент,-->
+<!--                    т.е. лишняя семантика, здесь hr выполняет декоративную функцию, которую можно закрыть и с помощью css border-->
                     <hr class="info__hr">
+<!--                    conatiner->container-->
                     <div class="info__conatiner">
                         <div class="info__block">
+<!--                            я думаю что это не заголовки, это больше dl dt dd, впрочем мелочи-->
                             <h4 class="info__title">Location</h4>
+<!--                            в этих info__block это всё не параграфы, это div, параграфы по большей части для статей, лишняя семантика-->
                             <p class="info__desc">Samara</p>
                         </div>
                         <div class="info__block">
@@ -63,6 +73,15 @@
                         </div>
                         <div class="info__block">
                             <h4 class="info__title">English level</h4>
+<!--                            мне нравится бутстрап, однако идея утилитных классов не так хороша по нескольким причинам-->
+<!--                            1) представь что всякий раз при стилизации чего-то приходится делать это в html,
+                                т.е. мы стилизуем не стилями css, а классами в html что плохо
+                                c точки зрения разделения технологий-->
+<!--                            2) если у тебя набирается много одинаковых блоков кода и ты решил в какой-то момент начать рефакторинг и всем одинаковым блокам кода-->
+<!--                            меняешь скажем позиционирование или делаешь их не КАПСОМ, то все эти изменения придётся вносить в каждый такой блок кода-->
+<!--                            вместо одного места в css того же .info__desc с модификаторами -->
+
+<!--                            более того, уровень А2 написать вполне себе ок, text-uppercase здесь ни к чему-->
                             <p class="info__desc text-center text-uppercase">a2</p>
                         </div>
                     </div>
@@ -77,8 +96,11 @@
                     <div class="question__name question__name--gray">
                         <h2 class="question__title">Какой опыт
                             программирования вне университета?</h2>
+<!--                        лишние блоки?-->
                         <div class="question__desc"></div>
                     </div>
+<!--                    ans - это лишнее сокращение, question__answers выглядит более чем хорошо-->
+<!--                    нет смысла лишней вложенности div.question__ans.answers вполне себе ок-->
                     <div class="question__ans">
                         <p class="answer">
                             Вне университета я изучаю python, js (и его веб фреймворки). Опыт и практику на них получаю

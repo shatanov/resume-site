@@ -4,13 +4,17 @@
   box-sizing: border-box;
 }
 
-
+/*вполне можно normalize заюзать, более того раз юзаешь БЭМ,*/
+/*то всё равно такой сброс нужен внутри какого-нибудь блока .list,*/
+/*делать сброс всем ul даже под каким-то классом не самый норм вариант, т.к.*/
+/*это касается и обычных списков, где такой padding вполне уместен*/
 ul[class],
 ol[class] {
   padding: 0;
 }
 
-
+/*аналогично идее выше, это сродни устаревшей идее reset.css, с точки зрения контетного сайта - плохо
+профит от такого сброса не очень большой при наличии БЭМ */
 body,
 h1,
 h2,
@@ -31,6 +35,7 @@ dd {
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
+    /*я даже загуглил, не видел ни разу, оно точно даёт профит в отличии от auto, особенно на body теге?*/
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: 'Lato', sans-serif;
@@ -42,7 +47,8 @@ ol[class] {
   list-style: none;
 }
 
-
+/*не увидел применения у тебя, а оно точно надо в проде на сайтах?*/
+/*вообще идея интересная, но наверно без реальных исследований я бы не стал так делать*/
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
@@ -99,13 +105,17 @@ select {
 .user {
     display: flex;
     flex-wrap: wrap;
+    /*нарушение по БЭМ, ты по сути блоку задал внешний отступ, внешние отступы нормально задавать элементам, т.е. .header__user должен иметь такой отсуп*/
     margin-bottom: 60px;
 }
 
 .user__img {
+    /*скорее задача второго блока сдвигаться относительно первого, первый блок про это не знает ничего,*/
+    /*а ещё лучше эту задачу отдать родителю через gap фичу*/
     margin-right: 150px;
 }
 
+/*отдельный класс на img тег был бы кстати, бэм как раз чтобы каскада не допускать*/
 .user__img img{
     border-radius: 50%;
     max-height: 235px;
@@ -120,6 +130,8 @@ select {
     margin-right: 100px;  
 }
 
+/*не очень хорошо, лучше придерживаться mobile-first подхода*/
+/*из-за этого промахнулся с границей когда вёрстка плывёт, я вижу что именно этот блок уже на 980px развалился неправильно*/
 @media (max-width: 780px) {
     .user {
         flex-direction: column;
@@ -134,9 +146,12 @@ select {
     .user__content {
         display: flex;
         flex-direction: column;
+        /*лишнее*/
         justify-content: center;
     }
     .user__info {
+        /*вот ещё минусы отсутсвия mobile-first, ты зануляешь то что не пришлось бы занулять, стили надо добавлять,*/
+        /*а не оверрайдить*/
         margin-right: 0;
         text-align: center;
     }
@@ -181,6 +196,7 @@ select {
     justify-content: space-between;
 }
 
+/*вполне подходит для блока .info всё то же самое с border-top, padding-top*/
 .info__hr {
     background-color: #dcd9d9;
     border-style: none;
@@ -190,10 +206,13 @@ select {
 
 .info__block {
     color: var(--primary-gray);
+    /*это лишнее*/
     margin-right: 100px;
+    /*это можно родительскому блоку дать*/
     margin-bottom: 50px;
 }
 
+/*и это тоже лишнее*/
 .info__block:last-child {
     margin-right: 0px;
 }
@@ -204,13 +223,18 @@ select {
 }
 
 .info__desc {
+    /*лишнее*/
     font-weight: 400;
+    /*лишнее раз ссылкам дал переопеределение*/
     color: var(--primary-color);
 }
 
 .info__desc a{
+    /*лишнее*/
     font-weight: 400;
     color: var(--primary-color);
+    /*ты прибил формат ссылки, т.е. визуально сказать что это ссылка теперь нельзя, но это к дизайнеру вопросы,*/
+    /*UX то страдает*/
     text-decoration: none;
 }
 
@@ -223,9 +247,11 @@ select {
         justify-content: space-around;
     }
     .info__block {
+        /*это можно было бы решить через двуколоночный макет, вместо все колонки в одну строку, флексами*/
         width: 50%;
         margin-right: 0;
         text-align: center;
+        /*Эти 4 свойства ниже - лишние*/
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -234,6 +260,7 @@ select {
 }
 
 @media (max-width: 576px) {
+    /*оба этих свойства - оверрайд, который не должен случатся потому что по умолчанию блок уже этими свойствами обладает*/
     .info__block {
         width: 100%;
         margin-right: 0;
@@ -251,12 +278,14 @@ select {
     min-height: 350px;
 }
 
+/*ого, импортанты, уверен можно и без них справится, в БЭМ точно*/
 .question__name--gray {
     background-color: #ececec !important;
     border: none !important;
 }
 
 .question__name {
+    /* бОльшая часть стилей здесь - стили блока, не элемента*/
     width: 200px;
     background-color: #fff;
     border: 2px solid #ececec;
@@ -275,6 +304,8 @@ select {
     padding: 0 30px;
 }
 
+/*этот блок лишён смысла, можешь отменить его и убедиться что не делает ничего,
+такой код логичен когда мы хотим что-то с высотой сделать или расположить по высоте*/
 .question__ans {
     display: flex;
     flex-direction: column;
